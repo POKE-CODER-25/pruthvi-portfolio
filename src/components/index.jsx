@@ -28,7 +28,7 @@ import {
   X,
   Zap,
 } from 'lucide-react'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -562,6 +562,247 @@ export function Skills({ data }) {
   )
 }
 
+export function AIWorkflow({ data }) {
+  const icons = [Sparkles, Code2, WandSparkles, Rocket, GraduationCap]
+  const workflow = data.aiWorkflow
+
+  return (
+    <Section
+      id="ai-workflow"
+      eyebrow="Command center"
+      title={workflow.title}
+      subtitle={workflow.subtitle}
+      className="ai-workflow-section"
+    >
+      <Reveal>
+        <div className="workflow-command-center relative overflow-hidden rounded-lg border border-cyan-200/20 bg-white/[0.04] p-4 backdrop-blur-xl sm:p-5 lg:p-6">
+          <div className="workflow-radar" aria-hidden="true" />
+          <svg className="workflow-lines" viewBox="0 0 1000 420" preserveAspectRatio="none" aria-hidden="true">
+            <path className="workflow-line workflow-line-a" d="M500 210 C390 118 230 110 110 170" />
+            <path className="workflow-line workflow-line-b" d="M500 210 C435 114 355 82 248 86" />
+            <path className="workflow-line workflow-line-c" d="M500 210 C560 105 646 78 754 88" />
+            <path className="workflow-line workflow-line-d" d="M500 210 C638 144 772 138 902 176" />
+            <path className="workflow-line workflow-line-e" d="M500 210 C500 290 500 336 500 392" />
+          </svg>
+
+          <div className="relative grid gap-4 lg:grid-cols-[1fr_0.78fr_1fr] lg:items-center">
+            <div className="grid gap-4">
+              {workflow.cards.slice(0, 2).map((card, index) => {
+                const Icon = icons[index]
+                return (
+                  <WorkflowCard key={card.title} card={card} Icon={Icon} number={index + 1} delay={index * 0.04} />
+                )
+              })}
+            </div>
+
+            <motion.div
+              className="workflow-core relative mx-auto grid w-full max-w-[19rem] place-items-center rounded-lg border border-cyan-200/30 bg-[#061225]/86 p-5 text-center shadow-2xl shadow-cyan-500/20"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 250, damping: 20 }}
+            >
+              <span className="workflow-core-node" aria-hidden="true" />
+              <BrainCircuit className="h-9 w-9 text-cyan-100 drop-shadow-[0_0_16px_rgba(103,232,249,0.65)]" />
+              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-100/70">AI Build System</p>
+              <h3 className="mt-3 text-xl font-semibold leading-snug text-white">Plan. Generate. Test. Ship.</h3>
+              <div className="mt-5 grid w-full grid-cols-3 gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-slate-300">
+                {['Prompt', 'Code', 'Deploy'].map((item) => (
+                  <span key={item} className="rounded-md border border-cyan-200/15 bg-cyan-200/10 px-2 py-2">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+            <div className="grid gap-4">
+              {workflow.cards.slice(2, 4).map((card, index) => {
+                const cardIndex = index + 2
+                const Icon = icons[cardIndex]
+                return (
+                  <WorkflowCard key={card.title} card={card} Icon={Icon} number={cardIndex + 1} delay={cardIndex * 0.04} />
+                )
+              })}
+            </div>
+          </div>
+
+          <div className="relative mt-4 grid gap-4 lg:mx-auto lg:max-w-md">
+            {workflow.cards.slice(4).map((card, index) => {
+              const cardIndex = index + 4
+              const Icon = icons[cardIndex]
+              return (
+                <WorkflowCard key={card.title} card={card} Icon={Icon} number={cardIndex + 1} delay={cardIndex * 0.04} featured />
+              )
+            })}
+          </div>
+        </div>
+      </Reveal>
+    </Section>
+  )
+}
+
+function WorkflowCard({ card, Icon, number, delay = 0, featured = false }) {
+  return (
+    <motion.article
+      className={`workflow-card group relative overflow-hidden rounded-lg border border-cyan-200/16 bg-[#061225]/82 p-4 shadow-xl shadow-black/20 ${
+        featured ? 'workflow-card-featured' : ''
+      }`}
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      whileHover={{ y: -6, scale: 1.01 }}
+      transition={{ ...sectionTransition, delay }}
+    >
+      <span className="workflow-node" aria-hidden="true" />
+      <div className="relative flex items-start gap-3">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-cyan-200/30 bg-cyan-200/10 text-cyan-100 shadow-lg shadow-cyan-500/15">
+          <Icon className="h-5 w-5" />
+        </span>
+        <div>
+          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-cyan-100/62">
+            Workflow {String(number).padStart(2, '0')}
+          </p>
+          <h3 className="mt-2 text-base font-semibold leading-snug text-white">{card.title}</h3>
+        </div>
+      </div>
+      <p className="relative mt-3 text-sm leading-6 text-slate-300">{card.description}</p>
+    </motion.article>
+  )
+}
+
+function AnimatedCounter({ value, suffix = '' }) {
+  const ref = useRef(null)
+  const [visible, setVisible] = useState(false)
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    const node = ref.current
+    if (!node) return undefined
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.35 },
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!visible) return undefined
+
+    let frameId = 0
+    const duration = 900
+    const startedAt = performance.now()
+
+    const tick = (time) => {
+      const progress = Math.min((time - startedAt) / duration, 1)
+      const eased = 1 - (1 - progress) ** 3
+      setCount(Math.round(value * eased))
+
+      if (progress < 1) {
+        frameId = requestAnimationFrame(tick)
+      }
+    }
+
+    frameId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frameId)
+  }, [value, visible])
+
+  return (
+    <span ref={ref}>
+      {String(count).padStart(2, '0')}
+      {suffix}
+    </span>
+  )
+}
+
+export function GitHubActivity({ data }) {
+  const icons = [Code2, Rocket, BrainCircuit, Globe2]
+
+  return (
+    <Section
+      id="github-activity"
+      eyebrow="Repository pulse"
+      title={data.githubActivity.title}
+      subtitle={data.githubActivity.subtitle}
+      className="github-activity-section"
+    >
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {data.githubActivity.stats.map((stat, index) => {
+          const Icon = icons[index] ?? Sparkles
+          return (
+            <Reveal key={stat.label} delay={index * 0.04}>
+              <motion.article
+                className="github-stat-card group relative h-full overflow-hidden rounded-lg border border-cyan-200/16 bg-white/[0.05] p-4 backdrop-blur-xl"
+                whileHover={{ y: -5, scale: 1.015 }}
+                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+              >
+                <span className="github-stat-node" aria-hidden="true" />
+                <div className="relative flex items-start justify-between gap-3">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-cyan-200/25 bg-cyan-200/10 text-cyan-100 shadow-lg shadow-cyan-500/15">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <p className="github-stat-number text-3xl font-semibold leading-none text-white">
+                    <AnimatedCounter value={stat.value} />
+                  </p>
+                </div>
+                <p className="relative mt-4 text-sm font-semibold leading-6 text-slate-200">{stat.label}</p>
+              </motion.article>
+            </Reveal>
+          )
+        })}
+      </div>
+    </Section>
+  )
+}
+
+export function PortfolioStats({ data }) {
+  const icons = [Rocket, Award, BrainCircuit, Zap]
+
+  return (
+    <Section
+      id="portfolio-stats"
+      eyebrow="Build metrics"
+      title={data.portfolioStats.title}
+      subtitle={data.portfolioStats.subtitle}
+      className="portfolio-stats-section"
+    >
+      <Reveal>
+        <div className="portfolio-stats-panel relative overflow-hidden rounded-lg border border-cyan-200/18 bg-white/[0.04] p-4 backdrop-blur-xl sm:p-5">
+          <div className="relative grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {data.portfolioStats.stats.map((stat, index) => {
+              const Icon = icons[index] ?? Sparkles
+              return (
+                <motion.article
+                  key={stat.label}
+                  className="portfolio-stat-card group relative overflow-hidden rounded-lg border border-white/10 bg-[#061225]/72 p-4"
+                  whileHover={{ y: -5, scale: 1.015 }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+                >
+                  <div className="relative flex items-center justify-between gap-3">
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-cyan-200/25 bg-cyan-200/10 text-cyan-100 shadow-lg shadow-cyan-500/15">
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <span className="portfolio-stat-signal" aria-hidden="true" />
+                  </div>
+                  <p className="portfolio-stat-value relative mt-5 text-3xl font-semibold leading-none text-white sm:text-4xl">
+                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                  </p>
+                  <p className="relative mt-2 text-sm font-medium leading-6 text-slate-300">{stat.label}</p>
+                </motion.article>
+              )
+            })}
+          </div>
+        </div>
+      </Reveal>
+    </Section>
+  )
+}
+
 export function Projects({ data }) {
   const [comingSoonProject, setComingSoonProject] = useState(null)
 
@@ -582,7 +823,12 @@ export function Projects({ data }) {
                 <div className="relative">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-100/75">{project.status}</p>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-100/75">{project.status}</p>
+                        <span className="ai-build-badge inline-flex items-center rounded-md border border-cyan-200/25 bg-cyan-200/10 px-2.5 py-1 text-[0.68rem] font-semibold text-cyan-50">
+                          ⚡ AI Accelerated Build
+                        </span>
+                      </div>
                       <h3 className="mt-3 text-2xl font-semibold text-white">{project.title}</h3>
                       <p className="mt-1 text-sm text-slate-400">{project.subtitle}</p>
                     </div>
@@ -755,6 +1001,54 @@ export function CareerGoals({ data }) {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </div>
+      </Reveal>
+    </Section>
+  )
+}
+
+export function FutureVision({ data }) {
+  return (
+    <Section
+      id="future-vision"
+      eyebrow="Roadmap"
+      title={data.futureVision.title}
+      subtitle={data.futureVision.subtitle}
+      className="future-vision-section"
+    >
+      <Reveal>
+        <div className="future-roadmap relative overflow-hidden rounded-lg border border-cyan-200/18 bg-white/[0.04] p-4 backdrop-blur-xl sm:p-5 lg:p-6">
+          <div className="future-roadmap-line" aria-hidden="true" />
+          <div className="relative grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {data.futureVision.stages.map((stage, index) => (
+              <motion.article
+                key={`${stage.label}-${stage.title}`}
+                className={`future-stage-card group relative overflow-hidden rounded-lg border p-4 ${
+                  index === 0
+                    ? 'border-cyan-200/35 bg-cyan-200/10'
+                    : index === data.futureVision.stages.length - 1
+                      ? 'border-violet-200/35 bg-violet-200/10'
+                      : 'border-white/10 bg-[#061225]/72'
+                }`}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-70px' }}
+                whileHover={{ y: -6, scale: 1.01 }}
+                transition={{ ...sectionTransition, delay: index * 0.045 }}
+              >
+                <span className="future-stage-node" aria-hidden="true" />
+                <div className="relative flex items-start gap-3">
+                  <span className="future-stage-number grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-cyan-200/25 bg-cyan-200/10 text-sm font-semibold text-cyan-100">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-cyan-100/65">{stage.label}</p>
+                    <h3 className="mt-2 text-base font-semibold leading-snug text-white">{stage.title}</h3>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
           </div>
         </div>
       </Reveal>

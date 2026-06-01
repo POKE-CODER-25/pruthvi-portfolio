@@ -14,6 +14,7 @@ export const portfolioData = {
   navItems: [
     { label: 'About', href: '#about' },
     { label: 'Skills', href: '#skills' },
+    { label: 'Workflow', href: '#ai-workflow' },
     { label: 'Projects', href: '#projects' },
     { label: 'Goals', href: '#goals' },
     { label: 'Contact', href: '#contact' },
@@ -63,6 +64,52 @@ export const portfolioData = {
       ],
     },
   ],
+  aiWorkflow: {
+    title: 'AI Development Workflow',
+    subtitle: 'How I build products using modern AI engineering systems.',
+    cards: [
+      {
+        title: 'Ideation',
+        description: 'Turning raw concepts into structured product plans.',
+      },
+      {
+        title: 'Codex Development',
+        description: 'Using OpenAI Codex to accelerate implementation, debugging, UI creation, and workflow execution.',
+      },
+      {
+        title: 'Iterative Product Design',
+        description: 'Rapid testing, redesign, optimization, and feature evolution.',
+      },
+      {
+        title: 'Deployment Pipeline',
+        description: 'GitHub, Vercel, Firebase, and production-ready delivery.',
+      },
+      {
+        title: 'AI-Augmented Learning',
+        description: 'Learning faster through experimentation, prototyping, and real-world projects.',
+      },
+    ],
+  },
+  githubActivity: {
+    title: 'GitHub Activity',
+    subtitle: 'Build signals across active repositories, live products, experiments, and deployment-ready work.',
+    stats: [
+      { label: 'Active Repositories', value: 4 },
+      { label: 'Live Projects', value: 1 },
+      { label: 'AI Product Experiments', value: 3 },
+      { label: 'Deployment Ready Projects', value: 2 },
+    ],
+  },
+  portfolioStats: {
+    title: 'Portfolio Stats',
+    subtitle: 'A compact snapshot of projects, certifications, AI tooling, and build momentum.',
+    stats: [
+      { label: 'Live Projects', value: 4, suffix: '+' },
+      { label: 'Infosys Certifications', value: 6, suffix: '+' },
+      { label: 'AI Models Used', value: 10, suffix: '+' },
+      { label: 'Development Hours', value: 300, suffix: '+' },
+    ],
+  },
   projects: [
     {
       title: 'Volt Sensei',
@@ -179,6 +226,18 @@ export const portfolioData = {
       { number: '03', title: 'Creative AI Products', description: 'Blend AI, design, and interaction into memorable user experiences.' },
       { number: '04', title: 'Multiplayer Experiences', description: 'Build real-time systems with social mechanics and polished gameplay loops.' },
       { number: '05', title: 'Product Engineering Internships', description: 'Contribute to teams shipping reliable user-facing software.' },
+    ],
+  },
+  futureVision: {
+    title: 'Future Vision',
+    subtitle: 'A focused roadmap from AI product building to founder-level systems.',
+    stages: [
+      { label: 'Current Stage', title: 'AI Product Builder' },
+      { label: 'Next', title: 'Full Stack AI Systems' },
+      { label: 'Next', title: 'GenAI Applications' },
+      { label: 'Next', title: 'Multiplayer Platform Development' },
+      { label: 'Next', title: 'Product Engineering' },
+      { label: 'Final', title: 'AI Startup Founder' },
     ],
   },
 }

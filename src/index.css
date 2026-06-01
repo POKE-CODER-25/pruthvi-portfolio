@@ -289,6 +289,30 @@ section {
   white-space: nowrap;
 }
 
+.ai-build-badge {
+  line-height: 1.15;
+  white-space: nowrap;
+  box-shadow:
+    0 0 16px rgba(34, 211, 238, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.group:hover .ai-build-badge {
+  border-color: rgba(167, 139, 250, 0.45);
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.16), rgba(139, 92, 246, 0.14));
+  box-shadow:
+    0 0 18px rgba(34, 211, 238, 0.26),
+    0 0 26px rgba(139, 92, 246, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.11);
+  animation: aiBuildBadgePulse 1.8s ease-in-out infinite;
+  transform: translateY(-1px);
+}
+
 .screenshot-lightbox {
   animation: lightboxFade 0.18s ease-out;
 }
@@ -400,6 +424,78 @@ section {
   }
 }
 
+@keyframes aiBuildBadgePulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 2px rgba(103, 232, 249, 0.18));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.28));
+  }
+}
+
+@keyframes githubNodePulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    box-shadow:
+      0 0 0 6px rgba(167, 139, 250, 0.08),
+      0 0 18px rgba(167, 139, 250, 0.72);
+  }
+  50% {
+    opacity: 1;
+    box-shadow:
+      0 0 0 10px rgba(103, 232, 249, 0.12),
+      0 0 24px rgba(103, 232, 249, 0.88);
+  }
+}
+
+@keyframes portfolioSignalPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 7px rgba(103, 232, 249, 0.08),
+      0 0 20px rgba(103, 232, 249, 0.72);
+  }
+  50% {
+    box-shadow:
+      0 0 0 11px rgba(167, 139, 250, 0.11),
+      0 0 28px rgba(167, 139, 250, 0.85);
+  }
+}
+
+@keyframes futureLineTrace {
+  from {
+    transform: translateX(-35%);
+  }
+  to {
+    transform: translateX(520%);
+  }
+}
+
+@keyframes futureLineTraceMobile {
+  from {
+    transform: translateY(-35%);
+  }
+  to {
+    transform: translateY(620%);
+  }
+}
+
+@keyframes futureNodePulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 7px rgba(103, 232, 249, 0.08),
+      0 0 22px rgba(103, 232, 249, 0.82);
+  }
+  50% {
+    box-shadow:
+      0 0 0 11px rgba(167, 139, 250, 0.12),
+      0 0 30px rgba(167, 139, 250, 0.9);
+  }
+}
+
 .section-title {
   text-shadow: 0 0 28px rgba(103, 232, 249, 0.22);
 }
@@ -445,6 +541,434 @@ section {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.06),
     0 18px 50px rgba(8, 145, 178, 0.09);
+}
+
+.workflow-command-center {
+  min-height: 31rem;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.34),
+    0 0 54px rgba(34, 211, 238, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.github-stat-card {
+  min-height: 8.25rem;
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.24),
+    0 0 28px rgba(34, 211, 238, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.github-stat-card::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(circle at 18% 18%, rgba(103, 232, 249, 0.15), transparent 8rem),
+    linear-gradient(135deg, rgba(103, 232, 249, 0.09), transparent 42%, rgba(139, 92, 246, 0.1));
+  opacity: 0.82;
+}
+
+.github-stat-card::after {
+  position: absolute;
+  right: -15%;
+  bottom: -24%;
+  width: 8rem;
+  height: 8rem;
+  border: 1px solid rgba(103, 232, 249, 0.12);
+  border-radius: 999px;
+  content: "";
+  box-shadow: inset 0 0 28px rgba(103, 232, 249, 0.06);
+}
+
+.github-stat-card:hover {
+  border-color: rgba(103, 232, 249, 0.44);
+  background: rgba(8, 24, 48, 0.84);
+  box-shadow:
+    0 18px 54px rgba(34, 211, 238, 0.14),
+    0 0 28px rgba(139, 92, 246, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.github-stat-number {
+  text-shadow:
+    0 0 18px rgba(103, 232, 249, 0.32),
+    0 0 28px rgba(139, 92, 246, 0.18);
+}
+
+.github-stat-node {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: #a78bfa;
+  box-shadow:
+    0 0 0 6px rgba(167, 139, 250, 0.08),
+    0 0 18px rgba(167, 139, 250, 0.72);
+}
+
+.github-stat-card:hover .github-stat-node {
+  animation: githubNodePulse 1.7s ease-in-out infinite;
+}
+
+.portfolio-stats-panel {
+  box-shadow:
+    0 22px 70px rgba(0, 0, 0, 0.28),
+    0 0 42px rgba(34, 211, 238, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.portfolio-stats-panel::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(circle at 12% 18%, rgba(103, 232, 249, 0.16), transparent 16rem),
+    radial-gradient(circle at 86% 22%, rgba(139, 92, 246, 0.14), transparent 18rem),
+    linear-gradient(135deg, rgba(103, 232, 249, 0.055), transparent 42%, rgba(167, 139, 250, 0.055));
+}
+
+.portfolio-stat-card {
+  min-height: 10rem;
+  box-shadow:
+    0 14px 38px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.portfolio-stat-card::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    linear-gradient(135deg, rgba(103, 232, 249, 0.12), transparent 46%, rgba(139, 92, 246, 0.1)),
+    repeating-linear-gradient(0deg, rgba(103, 232, 249, 0.025) 0 1px, transparent 1px 22px);
+  opacity: 0.78;
+}
+
+.portfolio-stat-card:hover {
+  border-color: rgba(103, 232, 249, 0.42);
+  background: rgba(8, 24, 48, 0.9);
+  box-shadow:
+    0 18px 52px rgba(34, 211, 238, 0.14),
+    0 0 28px rgba(139, 92, 246, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.portfolio-stat-value {
+  text-shadow:
+    0 0 20px rgba(103, 232, 249, 0.34),
+    0 0 32px rgba(139, 92, 246, 0.16);
+}
+
+.portfolio-stat-signal {
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 999px;
+  background: #67e8f9;
+  box-shadow:
+    0 0 0 7px rgba(103, 232, 249, 0.08),
+    0 0 20px rgba(103, 232, 249, 0.72);
+}
+
+.portfolio-stat-card:hover .portfolio-stat-signal {
+  animation: portfolioSignalPulse 1.8s ease-in-out infinite;
+}
+
+.future-roadmap {
+  box-shadow:
+    0 22px 70px rgba(0, 0, 0, 0.3),
+    0 0 42px rgba(34, 211, 238, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.future-roadmap::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(circle at 12% 16%, rgba(103, 232, 249, 0.16), transparent 17rem),
+    radial-gradient(circle at 88% 20%, rgba(139, 92, 246, 0.15), transparent 18rem),
+    repeating-linear-gradient(90deg, rgba(103, 232, 249, 0.03) 0 1px, transparent 1px 44px);
+}
+
+.future-roadmap-line {
+  position: absolute;
+  left: 2.25rem;
+  right: 2.25rem;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(103, 232, 249, 0.62), rgba(167, 139, 250, 0.52), transparent);
+  box-shadow:
+    0 0 18px rgba(103, 232, 249, 0.46),
+    0 0 30px rgba(139, 92, 246, 0.18);
+}
+
+.future-roadmap-line::before {
+  position: absolute;
+  inset: -1px auto -1px 0;
+  width: 22%;
+  content: "";
+  background: linear-gradient(90deg, transparent, #67e8f9, transparent);
+  filter: blur(1px);
+  animation: futureLineTrace 4.5s linear infinite;
+}
+
+.future-stage-card {
+  min-height: 8.5rem;
+  box-shadow:
+    0 14px 38px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.future-stage-card::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(135deg, rgba(103, 232, 249, 0.12), transparent 44%, rgba(139, 92, 246, 0.12));
+  opacity: 0.72;
+}
+
+.future-stage-card:hover {
+  border-color: rgba(103, 232, 249, 0.48);
+  background: rgba(8, 24, 48, 0.94);
+  box-shadow:
+    0 18px 52px rgba(34, 211, 238, 0.14),
+    0 0 30px rgba(139, 92, 246, 0.12);
+}
+
+.future-stage-node {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 0.58rem;
+  height: 0.58rem;
+  border-radius: 999px;
+  background: #67e8f9;
+  box-shadow:
+    0 0 0 7px rgba(103, 232, 249, 0.08),
+    0 0 22px rgba(103, 232, 249, 0.82);
+}
+
+.future-stage-card:hover .future-stage-node {
+  animation: futureNodePulse 1.8s ease-in-out infinite;
+}
+
+.future-stage-number {
+  box-shadow:
+    0 0 20px rgba(34, 211, 238, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.workflow-command-center::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(circle at 50% 44%, rgba(103, 232, 249, 0.16), transparent 17rem),
+    radial-gradient(circle at 18% 12%, rgba(139, 92, 246, 0.13), transparent 16rem),
+    radial-gradient(circle at 82% 18%, rgba(37, 99, 235, 0.16), transparent 18rem),
+    repeating-linear-gradient(90deg, rgba(103, 232, 249, 0.035) 0 1px, transparent 1px 46px);
+}
+
+.workflow-radar {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: min(76vw, 34rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(103, 232, 249, 0.12);
+  border-radius: 999px;
+  opacity: 0.85;
+  transform: translate(-50%, -50%);
+  box-shadow:
+    inset 0 0 34px rgba(103, 232, 249, 0.06),
+    0 0 48px rgba(139, 92, 246, 0.08);
+}
+
+.workflow-radar::before,
+.workflow-radar::after {
+  position: absolute;
+  inset: 16%;
+  border: 1px dashed rgba(103, 232, 249, 0.15);
+  border-radius: inherit;
+  content: "";
+}
+
+.workflow-radar::after {
+  inset: 32%;
+  border-color: rgba(139, 92, 246, 0.18);
+}
+
+.workflow-lines {
+  position: absolute;
+  inset: 1rem;
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.workflow-line {
+  fill: none;
+  stroke: rgba(103, 232, 249, 0.38);
+  stroke-width: 1.4;
+  stroke-dasharray: 9 15;
+  filter: drop-shadow(0 0 8px rgba(103, 232, 249, 0.45));
+  animation: workflowTrace 4.8s linear infinite;
+}
+
+.workflow-line-b,
+.workflow-line-d {
+  stroke: rgba(167, 139, 250, 0.35);
+  animation-duration: 5.6s;
+}
+
+.workflow-line-c,
+.workflow-line-e {
+  animation-duration: 6.2s;
+}
+
+.workflow-card {
+  min-height: 9.25rem;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.workflow-card::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    linear-gradient(135deg, rgba(103, 232, 249, 0.13), transparent 40%, rgba(139, 92, 246, 0.12)),
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+  opacity: 0.72;
+}
+
+.workflow-card::after {
+  position: absolute;
+  top: -45%;
+  left: -60%;
+  width: 38%;
+  height: 190%;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+  transform: rotate(22deg);
+  transition: left 0.65s ease;
+}
+
+.workflow-card:hover {
+  border-color: rgba(103, 232, 249, 0.5);
+  background: rgba(8, 24, 48, 0.95);
+  box-shadow:
+    0 18px 54px rgba(34, 211, 238, 0.16),
+    0 0 30px rgba(139, 92, 246, 0.1);
+}
+
+.workflow-card:hover::after {
+  left: 122%;
+}
+
+.workflow-card-featured {
+  border-color: rgba(167, 139, 250, 0.24);
+  background: rgba(8, 18, 42, 0.9);
+}
+
+.workflow-node,
+.workflow-core-node {
+  position: absolute;
+  border-radius: 999px;
+  background: #67e8f9;
+  box-shadow:
+    0 0 0 7px rgba(103, 232, 249, 0.08),
+    0 0 22px rgba(103, 232, 249, 0.9);
+  animation: workflowNodePulse 2.4s ease-in-out infinite;
+}
+
+.workflow-node {
+  top: 1rem;
+  right: 1rem;
+  width: 0.58rem;
+  height: 0.58rem;
+}
+
+.workflow-core-node {
+  top: -0.38rem;
+  left: 50%;
+  width: 0.72rem;
+  height: 0.72rem;
+  transform: translateX(-50%);
+}
+
+.workflow-core {
+  min-height: 17rem;
+}
+
+.workflow-core::before {
+  position: absolute;
+  inset: -1rem;
+  z-index: -1;
+  border-radius: inherit;
+  content: "";
+  background:
+    radial-gradient(circle, rgba(103, 232, 249, 0.18), transparent 65%),
+    conic-gradient(from 180deg, rgba(103, 232, 249, 0.22), rgba(139, 92, 246, 0.2), rgba(103, 232, 249, 0.22));
+  opacity: 0.58;
+  filter: blur(10px);
+  animation: workflowCoreGlow 5s ease-in-out infinite;
+}
+
+@keyframes workflowTrace {
+  to {
+    stroke-dashoffset: -96;
+  }
+}
+
+@keyframes workflowNodePulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    box-shadow:
+      0 0 0 7px rgba(103, 232, 249, 0.08),
+      0 0 22px rgba(103, 232, 249, 0.9);
+  }
+  50% {
+    opacity: 1;
+    box-shadow:
+      0 0 0 10px rgba(103, 232, 249, 0.12),
+      0 0 30px rgba(103, 232, 249, 1);
+  }
+}
+
+@keyframes workflowCoreGlow {
+  0%,
+  100% {
+    opacity: 0.42;
+  }
+  50% {
+    opacity: 0.72;
+  }
 }
 
 .roadmap-card {
@@ -655,6 +1179,52 @@ section {
 }
 
 @media (max-width: 1023px) {
+  .workflow-command-center {
+    min-height: auto;
+  }
+
+  .workflow-lines {
+    display: none;
+  }
+
+  .workflow-command-center::after {
+    position: absolute;
+    top: 3rem;
+    bottom: 3rem;
+    left: 2rem;
+    width: 1px;
+    content: "";
+    background: linear-gradient(180deg, transparent, rgba(103, 232, 249, 0.38), rgba(167, 139, 250, 0.28), transparent);
+    box-shadow: 0 0 18px rgba(103, 232, 249, 0.45);
+  }
+
+  .workflow-card,
+  .workflow-core {
+    margin-left: 1.75rem;
+  }
+
+  .future-roadmap-line {
+    top: 2rem;
+    bottom: 2rem;
+    left: 2rem;
+    right: auto;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(180deg, transparent, rgba(103, 232, 249, 0.56), rgba(167, 139, 250, 0.42), transparent);
+  }
+
+  .future-roadmap-line::before {
+    inset: 0 -1px auto -1px;
+    width: auto;
+    height: 18%;
+    background: linear-gradient(180deg, transparent, #67e8f9, transparent);
+    animation: futureLineTraceMobile 4.2s linear infinite;
+  }
+
+  .future-stage-card {
+    margin-left: 1.75rem;
+  }
+
   .mission-map .mission-orbit {
     position: relative;
     display: grid;
@@ -681,6 +1251,11 @@ section {
 @media (max-width: 640px) {
   .orb {
     opacity: 0.3;
+  }
+
+  .ai-build-badge {
+    max-width: 100%;
+    white-space: normal;
   }
 
   .screenshot-nav {

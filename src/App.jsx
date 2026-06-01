@@ -3,12 +3,16 @@ import { useEffect, useState } from 'react'
 import {
   Achievements,
   About,
+  AIWorkflow,
   CareerGoals,
   Certifications,
   Contact,
   Footer,
+  FutureVision,
+  GitHubActivity,
   Hero,
   Navbar,
+  PortfolioStats,
   Projects,
   Skills,
 } from './components'
@@ -60,10 +64,14 @@ function App() {
         <Hero data={portfolioData} />
         <About data={portfolioData} />
         <Skills data={portfolioData} />
+        <AIWorkflow data={portfolioData} />
         <Projects data={portfolioData} />
+        <GitHubActivity data={portfolioData} />
+        <PortfolioStats data={portfolioData} />
         <Certifications data={portfolioData} />
         <Achievements data={portfolioData} />
         <CareerGoals data={portfolioData} />
+        <FutureVision data={portfolioData} />
         <Contact data={portfolioData} />
       </motion.main>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: loading ? 0.25 : 1 }} transition={{ duration: 0.35, ease: 'easeOut' }}>
