@@ -13,6 +13,7 @@ import {
   FileBadge2,
   Globe2,
   GraduationCap,
+  Gamepad2,
   Layers3,
   Mail,
   MapPin,
@@ -81,7 +82,7 @@ function ExternalLink({ href, children, className = '' }) {
     <a
       href={href}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       className={`neon-link inline-flex items-center gap-2 transition hover:text-cyan-100 ${className}`}
     >
       {children}
@@ -148,12 +149,19 @@ function ComingSoonModal({ project, onClose }) {
   )
 }
 
-function ProjectScreenshotGallery({ screenshots = [] }) {
+function ProjectScreenshotGallery({ project }) {
+  const screenshots = project.screenshots ?? []
   const [activeIndex, setActiveIndex] = useState(0)
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [lightboxClosing, setLightboxClosing] = useState(false)
   const [missingImages, setMissingImages] = useState({})
   const activeScreenshot = screenshots[activeIndex]
+  const activeSource =
+    activeScreenshot && !missingImages[activeScreenshot.src]
+      ? activeScreenshot.src
+      : activeScreenshot?.fallbackSrc && !missingImages[activeScreenshot.fallbackSrc]
+        ? activeScreenshot.fallbackSrc
+        : null
   const closeLightbox = useCallback(() => {
     setLightboxClosing(true)
     window.setTimeout(() => {
@@ -187,11 +195,9 @@ function ProjectScreenshotGallery({ screenshots = [] }) {
     }
   }, [closeLightbox, lightboxOpen, screenshots.length])
 
-  if (!screenshots.length) return null
-
   const showPrevious = () => setActiveIndex((current) => (current === 0 ? screenshots.length - 1 : current - 1))
   const showNext = () => setActiveIndex((current) => (current === screenshots.length - 1 ? 0 : current + 1))
-  const canOpenLightbox = activeScreenshot && !missingImages[activeScreenshot.src]
+  const canOpenLightbox = Boolean(activeSource)
   const openLightbox = () => {
     if (!canOpenLightbox) return
     setLightboxClosing(false)
@@ -199,26 +205,29 @@ function ProjectScreenshotGallery({ screenshots = [] }) {
   }
 
   return (
-    <div className="project-gallery mt-6 rounded-lg border border-cyan-200/20 bg-[#020617]/45 p-3">
+    <div className="project-gallery relative aspect-[16/9] w-full shrink-0 overflow-hidden border-b border-cyan-200/20 bg-[#020617]/45">
       <button
         type="button"
         onClick={openLightbox}
-        className="project-gallery-frame group/preview relative block w-full overflow-hidden rounded-md border border-cyan-200/20 bg-[#061225] text-left"
+        className="project-gallery-frame group/preview relative block h-full w-full overflow-hidden bg-[#061225] text-left"
         aria-label={canOpenLightbox ? `Open ${activeScreenshot.label} screenshot fullscreen` : 'Screenshot preview unavailable'}
       >
-        {activeScreenshot && !missingImages[activeScreenshot.src] ? (
+        {activeSource ? (
           <img
-            src={activeScreenshot.src}
-            alt={`Volt Sensei ${activeScreenshot.label} screenshot`}
+            src={activeSource}
+            alt={`${project.title} ${activeScreenshot.label} screenshot`}
             loading="lazy"
             decoding="async"
-            onError={() => setMissingImages((current) => ({ ...current, [activeScreenshot.src]: true }))}
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025] group-hover/preview:scale-[1.035]"
+            onError={() => setMissingImages((current) => ({ ...current, [activeSource]: true }))}
+            className="h-full w-full overflow-hidden object-cover transition duration-500 group-hover:scale-[1.025] group-hover/preview:scale-[1.035]"
           />
         ) : (
-          <div className="project-gallery-placeholder">
-            <FileBadge2 className="h-8 w-8 text-cyan-100" />
-            <span>Screenshot coming soon</span>
+          <div className={`project-gallery-placeholder bg-gradient-to-br ${project.accent}`}>
+            <span className="project-placeholder-icon">
+              {project.category === 'Multiplayer Game' ? <Gamepad2 className="h-7 w-7" /> : <BrainCircuit className="h-7 w-7" />}
+            </span>
+            <strong>{project.title}</strong>
+            <span>{project.subtitle}</span>
           </div>
         )}
         <span className="absolute left-3 top-3 rounded-md border border-cyan-200/25 bg-[#020617]/70 px-2 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-cyan-100 backdrop-blur-md">
@@ -230,7 +239,7 @@ function ProjectScreenshotGallery({ screenshots = [] }) {
           </span>
         )}
       </button>
-      <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+      {screenshots.length > 1 && !project.hideScreenshotTabs && <div className="project-gallery-thumbs absolute inset-x-3 bottom-3 z-10 flex gap-2 overflow-x-auto">
         {screenshots.map((screenshot, index) => (
           <button
             key={screenshot.src}
@@ -245,7 +254,7 @@ function ProjectScreenshotGallery({ screenshots = [] }) {
             {screenshot.label}
           </button>
         ))}
-      </div>
+      </div>}
       {lightboxOpen && activeScreenshot && (
         <div
           className={`screenshot-lightbox fixed inset-0 z-[90] grid place-items-center bg-[#020617]/84 px-4 py-12 backdrop-blur-xl ${
@@ -253,7 +262,7 @@ function ProjectScreenshotGallery({ screenshots = [] }) {
           }`}
           role="dialog"
           aria-modal="true"
-          aria-label="Volt Sensei screenshot preview"
+          aria-label={`${project.title} screenshot preview`}
           onMouseDown={closeLightbox}
         >
           <div
@@ -277,14 +286,14 @@ function ProjectScreenshotGallery({ screenshots = [] }) {
               <ChevronLeft className="h-6 w-6" />
             </button>
             <div className="screenshot-lightbox-image overflow-hidden rounded-lg border border-cyan-200/35 bg-[#020617]">
-              {!missingImages[activeScreenshot.src] ? (
+              {activeSource ? (
                 <img
-                  src={activeScreenshot.src}
-                  alt={`Volt Sensei ${activeScreenshot.label} fullscreen screenshot`}
+                  src={activeSource}
+                  alt={`${project.title} ${activeScreenshot.label} fullscreen screenshot`}
                   className="mx-auto max-h-[84vh] w-full object-contain"
                   loading="eager"
                   decoding="async"
-                  onError={() => setMissingImages((current) => ({ ...current, [activeScreenshot.src]: true }))}
+                  onError={() => setMissingImages((current) => ({ ...current, [activeSource]: true }))}
                 />
               ) : (
                 <div className="project-gallery-placeholder min-h-[55vh]">
@@ -418,31 +427,31 @@ export function Hero({ data }) {
             ))}
           </div>
 
-          <div className="mt-8 grid max-w-xl grid-cols-3 gap-3">
+          <div className="hero-stat-grid mt-8 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
             {hero.stats.map((stat) => (
               <GlassCard key={stat.label} className="p-4 transition duration-300 hover:-translate-y-1 hover:border-cyan-200/35">
-                <p className="text-2xl font-semibold text-white">{stat.value}</p>
-                <p className="mt-1 text-xs leading-5 text-slate-400">{stat.label}</p>
+                <p className="text-lg font-semibold text-white">{stat.value}</p>
+                <p className="mt-1 text-xs leading-5 text-cyan-100/65">{stat.label}</p>
               </GlassCard>
             ))}
           </div>
         </Reveal>
 
         <Reveal delay={0.12}>
-          <div className="relative mx-auto aspect-[0.92] w-full max-w-[440px]">
+          <div className="hero-showcase relative mx-auto aspect-[0.92] w-full max-w-[440px]">
             <div className="absolute inset-0 rounded-[2rem] border border-cyan-200/25 bg-[radial-gradient(circle_at_35%_25%,rgba(125,211,252,0.24),transparent_34%),linear-gradient(135deg,rgba(37,99,235,0.22),rgba(255,255,255,0.03))] shadow-2xl shadow-cyan-950/60 backdrop-blur-xl" />
             <motion.div
               className="absolute left-[13%] top-[11%] h-[68%] w-[74%] rounded-[1.5rem] border border-cyan-200/20 bg-[#071426]/90 p-5 shadow-2xl shadow-black/40"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/70">Product System</p>
-                  <h2 className="mt-3 text-2xl font-semibold text-white">Volt Sensei</h2>
+                  <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/70">Featured build</p>
+                  <h2 className="mt-3 text-2xl font-semibold text-white">AI meets interaction</h2>
                 </div>
                 <BrainCircuit className="h-9 w-9 text-cyan-200" />
               </div>
               <div className="mt-8 grid gap-3">
-                {['AI quizzes', 'XP gamification', '3D learning', 'Firebase auth'].map((item) => (
+                {['AI learning products', 'Multiplayer game systems', 'Real-time Firebase', 'Polished React interfaces'].map((item) => (
                   <div key={item} className="flex items-center gap-3 rounded-md border border-cyan-200/15 bg-white/[0.06] px-3 py-3">
                     <CheckCircle2 className="h-4 w-4 text-cyan-200" />
                     <span className="text-sm text-slate-200">{item}</span>
@@ -453,7 +462,7 @@ export function Hero({ data }) {
             <motion.div
               className="absolute bottom-[8%] right-[3%] rounded-lg border border-violet-200/25 bg-violet-200/10 px-4 py-3 text-sm text-violet-50 backdrop-blur-xl"
             >
-              anime soul - product focus
+              4 products · AI + real-time systems
             </motion.div>
           </div>
         </Reveal>
@@ -468,9 +477,7 @@ export function About({ data }) {
     { number: '02', title: 'Building Volt Sensei' },
     { number: '03', title: 'Creating AI + Game Worlds' },
   ]
-  const tags = ['GenAI', 'Product Builder', 'Anime Soul', 'Interactive Systems']
-  const aboutText =
-    'I started as a student exploring AI tools, but slowly moved from learning to building. Volt Sensei became my first major live project - an AI-powered JEE learning platform built with React, Firebase, quizzes, gamification, and 3D learning models. I enjoy creating products that combine AI, design, gamification, and interactive systems. My long-term goal is to become an AI product builder who creates useful, memorable, and emotionally engaging digital experiences.'
+  const tags = ['AI Developer', 'Game Developer', 'Product Builder', 'Interactive Systems']
 
   return (
     <Section id="about" eyebrow="Origin story" title={data.about.title}>
@@ -517,7 +524,7 @@ export function About({ data }) {
               <h3 className="mt-6 max-w-xl text-xl font-semibold leading-snug text-white sm:text-2xl">
                 From AI curiosity to live product systems.
               </h3>
-              <p className="mt-5 text-sm leading-7 text-slate-300 sm:text-base">{aboutText}</p>
+              <p className="mt-5 text-sm leading-7 text-slate-300 sm:text-base">{data.about.body}</p>
               <div className="mt-7 grid gap-3 sm:grid-cols-3">
                 {['React', 'Firebase', '3D Models'].map((item) => (
                   <div key={item} className="rounded-lg border border-white/10 bg-white/[0.055] px-4 py-3 text-sm text-slate-200">
@@ -747,7 +754,7 @@ export function GitHubActivity({ data }) {
                     <Icon className="h-5 w-5" />
                   </span>
                   <p className="github-stat-number text-3xl font-semibold leading-none text-white">
-                    <AnimatedCounter value={stat.value} />
+                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </p>
                 </div>
                 <p className="relative mt-4 text-sm font-semibold leading-6 text-slate-200">{stat.label}</p>
@@ -808,42 +815,51 @@ export function Projects({ data }) {
 
   return (
     <>
-      <Section id="projects" eyebrow="Featured work" title="Featured Projects">
-        <div className="grid gap-5 lg:grid-cols-3">
+      <Section
+        id="projects"
+        eyebrow="Selected work"
+        title="Featured Creations"
+        subtitle="A collection of AI applications, multiplayer games, and full-stack products built to transform ideas into real-world experiences."
+      >
+        <div className="grid grid-cols-1 auto-rows-fr gap-8 md:grid-cols-2">
           {data.projects.map((project, index) => (
-            <Reveal key={project.title} delay={index * 0.06}>
+            <Reveal key={project.title} delay={index * 0.06} className="h-full">
               <motion.article
                 whileHover={{ y: -8, rotateX: 1, rotateY: -1 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-                className={`group relative h-full overflow-hidden rounded-lg border ${
+                className={`project-card group relative flex h-full flex-col overflow-hidden rounded-lg border ${
                   project.featured ? 'border-cyan-200/35 shadow-2xl shadow-cyan-500/15' : 'border-white/10'
-                } bg-white/[0.055] p-6 backdrop-blur-xl`}
+                } bg-white/[0.055] backdrop-blur-xl`}
               >
                 <div className={`absolute inset-x-0 top-0 h-28 bg-gradient-to-r ${project.accent} opacity-90 blur-2xl`} />
-                <div className="relative">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <div className="flex flex-wrap items-center gap-2">
-                        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-100/75">{project.status}</p>
-                        <span className="ai-build-badge inline-flex items-center rounded-md border border-cyan-200/25 bg-cyan-200/10 px-2.5 py-1 text-[0.68rem] font-semibold text-cyan-50">
-                          ⚡ AI Accelerated Build
-                        </span>
+                <ProjectScreenshotGallery project={project} />
+                <div className="relative flex flex-1 flex-col justify-between p-5 sm:p-6">
+                  <div>
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className={`project-status project-status-${project.status === 'Live' ? 'live' : 'development'}`}>
+                            {project.status}
+                          </span>
+                          <span className="inline-flex items-center rounded-md border border-violet-200/20 bg-violet-200/10 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-violet-50">
+                            {project.category}
+                          </span>
+                        </div>
+                        <h3 className="mt-3 text-2xl font-semibold text-white">{project.title}</h3>
+                        <p className="mt-1 text-sm text-slate-400">{project.subtitle}</p>
                       </div>
-                      <h3 className="mt-3 text-2xl font-semibold text-white">{project.title}</h3>
-                      <p className="mt-1 text-sm text-slate-400">{project.subtitle}</p>
+                      <Rocket className="h-7 w-7 shrink-0 text-cyan-100 transition group-hover:rotate-12 group-hover:drop-shadow-[0_0_14px_rgba(103,232,249,0.7)]" />
                     </div>
-                    <Rocket className="h-7 w-7 shrink-0 text-cyan-100 transition group-hover:rotate-12 group-hover:drop-shadow-[0_0_14px_rgba(103,232,249,0.7)]" />
+                    <p className="mt-6 text-sm leading-7 text-slate-300">{project.description}</p>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {project.stack.map((item) => (
+                        <span key={item} className="rounded-md border border-white/10 bg-black/20 px-3 py-2 text-xs text-slate-300">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <p className="mt-6 text-sm leading-7 text-slate-300">{project.description}</p>
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {project.stack.map((item) => (
-                      <span key={item} className="rounded-md border border-white/10 bg-black/20 px-3 py-2 text-xs text-slate-300">
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                  <ProjectScreenshotGallery screenshots={project.screenshots} />
-                  <div className="mt-7 flex flex-wrap gap-3 text-sm font-semibold text-cyan-100">
+                  <div className="flex flex-wrap gap-3 pt-7 text-sm font-semibold text-cyan-100">
                     {project.links.map((link) =>
                       link.comingSoon ? (
                         <button
@@ -861,6 +877,7 @@ export function Projects({ data }) {
                           href={link.href}
                           className="rounded-md border border-cyan-200/25 bg-cyan-200/10 px-4 py-2 hover:border-cyan-200/50 hover:bg-cyan-200/15"
                         >
+                          {link.label === 'GitHub' && <Code2 className="h-4 w-4" />}
                           {link.label}
                         </ExternalLink>
                       ),
@@ -1071,7 +1088,7 @@ export function Contact({ data }) {
     { label: identity.email, title: 'Email', href: `mailto:${identity.email}`, icon: Mail },
     { label: identity.linkedinLabel, title: 'LinkedIn', href: identity.linkedin, icon: Globe2, external: true },
     { label: identity.githubLabel, title: 'GitHub', href: identity.github, icon: Code2, external: true },
-    { label: identity.liveProjectLabel, title: 'Volt Sensei', href: identity.liveProject, icon: Rocket, external: true },
+    { label: identity.liveProjectLabel, title: identity.liveProjectTitle, href: identity.liveProject, icon: Rocket, external: true },
   ]
 
   const handleChange = (event) => {

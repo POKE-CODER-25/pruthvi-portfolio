@@ -8,8 +8,9 @@ export const portfolioData = {
     linkedinLabel: 'linkedin.com/in/pruthvi-ai-developer',
     github: 'https://github.com/POKE-CODER-25',
     githubLabel: 'github.com/POKE-CODER-25',
-    liveProject: 'https://volt-sensei.web.app',
-    liveProjectLabel: 'volt-sensei.web.app',
+    liveProject: 'https://pokemon-draft-arena-d21a7.web.app/',
+    liveProjectLabel: 'pokemon-draft-arena-d21a7.web.app',
+    liveProjectTitle: 'POKÉMON DRAFT ARENA',
   },
   navItems: [
     { label: 'About', href: '#about' },
@@ -20,25 +21,26 @@ export const portfolioData = {
     { label: 'Contact', href: '#contact' },
   ],
   hero: {
-    kicker: 'AI builder with product instincts',
-    title: 'Building AI-powered worlds and experiences.',
+    kicker: 'AI + multiplayer product developer',
+    title: 'Building AI Products and Multiplayer Games',
     subtitle:
-      'I am an AI-focused developer passionate about creating real-world generative AI products, interactive learning systems, creative apps, and multiplayer experiences.',
+      'I create interactive web apps, AI-powered platforms, and real-time multiplayer games using modern technologies like React, Firebase, and AI tools.',
     actions: [
       { label: 'View Projects', href: '#projects', variant: 'primary' },
       { label: 'Download Resume', href: '/resume.pdf', variant: 'secondary', external: true },
       { label: 'Contact Me', href: '#contact', variant: 'ghost' },
     ],
     stats: [
-      { value: '01', label: 'Live AI product' },
-      { value: '09', label: 'Certifications' },
-      { value: '03', label: 'Product tracks' },
+      { value: 'AI', label: 'Developer' },
+      { value: 'Game', label: 'Developer' },
+      { value: '4', label: 'Major Projects' },
+      { value: 'Firebase', label: 'Powered' },
     ],
   },
   about: {
     title: 'About Me',
     body:
-      'I started as a student exploring AI and gradually moved from learning tools to building real products. My first major live project is Volt Sensei, an AI-powered JEE learning platform. I enjoy combining AI, design, gamification, anime-inspired experiences, and interactive systems. My goal is to become an AI product builder who creates useful and memorable digital experiences.',
+      'I’m Pruthvi, an AI and Game Developer focused on building interactive digital experiences. My work combines artificial intelligence, multiplayer systems, modern web technologies, and creative game design to create products that are both technically challenging and enjoyable to use. From AI-powered learning platforms to real-time multiplayer games, I enjoy turning ambitious ideas into polished, deployable projects.',
   },
   skills: [
     {
@@ -94,10 +96,10 @@ export const portfolioData = {
     title: 'GitHub Activity',
     subtitle: 'Build signals across active repositories, live products, experiments, and deployment-ready work.',
     stats: [
-      { label: 'Active Repositories', value: 4 },
-      { label: 'Live Projects', value: 1 },
-      { label: 'AI Product Experiments', value: 3 },
-      { label: 'Deployment Ready Projects', value: 2 },
+      { label: 'Active Repositories', value: 10, suffix: '+' },
+      { label: 'Live Projects', value: 2, suffix: '+' },
+      { label: 'AI Product Experiments', value: 5, suffix: '+' },
+      { label: 'Deployment Ready Projects', value: 2, suffix: '+' },
     ],
   },
   portfolioStats: {
@@ -114,16 +116,17 @@ export const portfolioData = {
     {
       title: 'Volt Sensei',
       subtitle: 'AI-Powered JEE Learning Platform',
+      category: 'AI EdTech',
       status: 'Live',
       stack: ['React.js', 'Firebase', 'Tailwind CSS', 'Generative AI'],
       description:
-        'A live AI-powered JEE learning platform with AI quizzes, XP gamification, formula sections, Firebase authentication, 3D educational models, and interactive learning experiences.',
+        'Volt Sensei is an AI-powered JEE learning platform that helps students learn Physics, Chemistry, and Mathematics through interactive AI Senseis, quizzes, formula tools, dashboards, 3D models, and visual learning experiences.',
       links: [
         { label: 'Live Demo', href: 'https://volt-sensei.web.app' },
         { label: 'GitHub', href: 'https://github.com/POKE-CODER-25/VOLT_SENSEI' },
       ],
       screenshots: [
-        { src: '/assets/projects/volt-home.png', label: 'Home' },
+        { src: '/projects/volt-sensei.png', fallbackSrc: '/assets/projects/volt-home.png', label: 'Overview' },
         { src: '/assets/projects/volt-bots.png', label: 'AI Bots' },
         { src: '/assets/projects/volt-3dmodels.png', label: '3D Models' },
         { src: '/assets/projects/volt-quiz.png', label: 'Quiz' },
@@ -133,23 +136,55 @@ export const portfolioData = {
       accent: 'from-cyan-300/25 via-blue-300/15 to-violet-300/20',
     },
     {
-      title: 'AI Fitness Transformation App',
-      subtitle: 'Mobile-first AI Fitness Companion',
+      title: 'Pokémon Draft Arena',
+      subtitle: 'Multiplayer Strategy Battle Game',
+      category: 'Multiplayer Game',
+      status: 'Live',
+      stack: ['React.js', 'Firebase', 'Realtime Multiplayer', 'Game Systems'],
+      description:
+        'Pokémon Draft Arena is a real-time multiplayer strategy game where two trainers create private rooms, draft hidden teams from randomized Pokémon pools, and compete through a score-based battle system. It includes hidden drafting, category-based pools, team previews, battle simulation, type-advantage scoring, match results, and Firebase-powered state management.',
+      links: [
+        { label: 'Live Demo', href: 'https://pokemon-draft-arena-d21a7.web.app/' },
+        { label: 'GitHub', href: 'https://github.com/POKE-CODER-25/POKEMON_BATTLE_ARENA' },
+      ],
+      screenshots: [
+        { src: '/assets/projects/Battle_Arena/pokemon-draft-arena-1.png', label: 'Battle Arena' },
+        { src: '/assets/projects/Battle_Arena/pokemon-draft-arena-2.png', label: 'Room Setup' },
+        { src: '/assets/projects/Battle_Arena/pokemon-draft-arena-3.png', label: 'Team Draft' },
+        { src: '/assets/projects/Battle_Arena/pokemon-draft-arena-4.png', label: 'Team Preview' },
+        { src: '/assets/projects/Battle_Arena/pokemon-draft-arena-5.png', label: 'Battle Results' },
+      ],
+      hideScreenshotTabs: true,
+      accent: 'from-violet-300/25 via-blue-300/15 to-cyan-300/20',
+    },
+    {
+      title: 'Healthy Minds',
+      subtitle: 'AI Fitness Transformation Platform',
+      category: 'AI Fitness',
       status: 'In Development',
       stack: ['React Native / React', 'Firebase', 'Generative AI'],
       description:
-        'A mobile-first AI fitness companion with body transformation paths, tracking systems, discipline mechanics, streaks, and personalized fitness experiences.',
-      links: [{ label: 'Preview Status', comingSoon: true }],
+        'Healthy Minds is an AI fitness transformation platform designed to create personalized fitness paths, nutrition guidance, progress tracking, and workout learning experiences.',
+      links: [
+        { label: 'GitHub', href: 'https://github.com/POKE-CODER-25/Healthy-Minds' },
+        { label: 'In Development', comingSoon: true },
+      ],
+      screenshots: [{ src: '/projects/healthy-minds.png', label: 'Product Preview' }],
       accent: 'from-cyan-300/20 via-blue-300/10 to-pink-300/20',
     },
     {
       title: "King's Guess",
-      subtitle: 'Multiplayer Social Strategy Game',
+      subtitle: 'Multiplayer Social Deduction Game',
+      category: 'Multiplayer Game',
       status: 'In Development',
-      stack: ['React.js', 'Firebase Realtime DB', 'WebSockets'],
+      stack: ['React.js', 'Firebase', 'Realtime Multiplayer', 'Game Logic'],
       description:
-        'A multiplayer social strategy game with friends-only rooms, hidden roles, role-swapping mechanics, cartoonish visuals, and real-time gameplay systems.',
-      links: [{ label: 'Preview Status', comingSoon: true }],
+        "King’s Guess is a multiplayer social deduction game inspired by classic hidden-role gameplay, featuring private rooms, secret roles, turn-based guessing, scoring, reconnect logic, and real-time Firebase gameplay.",
+      links: [
+        { label: 'GitHub', href: 'https://github.com/POKE-CODER-25/Kings-Guess' },
+        { label: 'In Development', comingSoon: true },
+      ],
+      screenshots: [{ src: '/projects/kings-guess.png', label: 'Game Preview' }],
       accent: 'from-violet-300/25 via-cyan-300/10 to-blue-300/20',
     },
   ],
