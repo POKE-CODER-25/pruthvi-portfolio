@@ -33,7 +33,7 @@ export const portfolioData = {
     stats: [
       { value: 'AI', label: 'Developer' },
       { value: 'Game', label: 'Developer' },
-      { value: '4', label: 'Major Projects' },
+      { value: '5', label: 'Major Projects' },
       { value: 'Firebase', label: 'Powered' },
     ],
   },
@@ -97,16 +97,16 @@ export const portfolioData = {
     subtitle: 'Build signals across active repositories, live products, experiments, and deployment-ready work.',
     stats: [
       { label: 'Active Repositories', value: 10, suffix: '+' },
-      { label: 'Live Projects', value: 2, suffix: '+' },
+      { label: 'Live Projects', value: 3, suffix: '+' },
       { label: 'AI Product Experiments', value: 5, suffix: '+' },
-      { label: 'Deployment Ready Projects', value: 2, suffix: '+' },
+      { label: 'Deployment Ready Projects', value: 3, suffix: '+' },
     ],
   },
   portfolioStats: {
     title: 'Portfolio Stats',
     subtitle: 'A compact snapshot of projects, certifications, AI tooling, and build momentum.',
     stats: [
-      { label: 'Live Projects', value: 4, suffix: '+' },
+      { label: 'Live Projects', value: 3, suffix: '+' },
       { label: 'Infosys Certifications', value: 6, suffix: '+' },
       { label: 'AI Models Used', value: 10, suffix: '+' },
       { label: 'Development Hours', value: 300, suffix: '+' },
@@ -153,6 +153,28 @@ export const portfolioData = {
         { src: '/assets/projects/Battle_Arena/pokemon-draft-arena-3.png', label: 'Team Draft' },
         { src: '/assets/projects/Battle_Arena/pokemon-draft-arena-4.png', label: 'Team Preview' },
         { src: '/assets/projects/Battle_Arena/pokemon-draft-arena-5.png', label: 'Battle Results' },
+      ],
+      hideScreenshotTabs: true,
+      accent: 'from-violet-300/25 via-blue-300/15 to-cyan-300/20',
+    },
+    {
+      title: 'ResumeForge',
+      subtitle: 'AI-Assisted Resume Builder and Analyzer',
+      category: 'Live Web Application',
+      status: 'Live & Deployed',
+      stack: ['React', 'Vite', 'Tailwind CSS', 'Firebase Hosting', 'JavaScript', 'PDF Processing', 'DOCX Processing', 'Local Storage'],
+      description:
+        'ResumeForge is an AI-assisted resume builder and resume analysis platform designed to help students and job seekers create stronger resumes. It includes a resume builder, resume health report, upload and analysis workflow, improvement suggestions, live preview, resume editor, PDF and DOCX export, and local data persistence.',
+      links: [
+        { label: 'Live Demo', href: 'https://resume-forge-25.web.app/' },
+        { label: 'GitHub Repository', href: 'https://github.com/POKE-CODER-25/ResumeForge' },
+      ],
+      screenshots: [
+        { src: '/assets/projects/ResumeForge/resumeforge-1.png', label: 'Resume Builder' },
+        { src: '/assets/projects/ResumeForge/resumeforge-2.png', label: 'Health Report' },
+        { src: '/assets/projects/ResumeForge/resumeforge-3.png', label: 'Upload Analysis' },
+        { src: '/assets/projects/ResumeForge/resumeforge-4.png', label: 'Live Preview' },
+        { src: '/assets/projects/ResumeForge/resumeforge-5.png', label: 'Export Tools' },
       ],
       hideScreenshotTabs: true,
       accent: 'from-violet-300/25 via-blue-300/15 to-cyan-300/20',

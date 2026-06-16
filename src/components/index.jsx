@@ -838,7 +838,7 @@ export function Projects({ data }) {
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className={`project-status project-status-${project.status === 'Live' ? 'live' : 'development'}`}>
+                          <span className={`project-status project-status-${project.status.includes('Live') ? 'live' : 'development'}`}>
                             {project.status}
                           </span>
                           <span className="inline-flex items-center rounded-md border border-violet-200/20 bg-violet-200/10 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-violet-50">
@@ -877,7 +877,7 @@ export function Projects({ data }) {
                           href={link.href}
                           className="rounded-md border border-cyan-200/25 bg-cyan-200/10 px-4 py-2 hover:border-cyan-200/50 hover:bg-cyan-200/15"
                         >
-                          {link.label === 'GitHub' && <Code2 className="h-4 w-4" />}
+                          {link.label.startsWith('GitHub') && <Code2 className="h-4 w-4" />}
                           {link.label}
                         </ExternalLink>
                       ),
