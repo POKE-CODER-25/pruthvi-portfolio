@@ -33,7 +33,7 @@ export const portfolioData = {
     stats: [
       { value: 'AI', label: 'Developer' },
       { value: 'Game', label: 'Developer' },
-      { value: '6', label: 'Major Projects' },
+      { value: '5', label: 'Major Projects' },
       { value: 'Firebase', label: 'Powered' },
     ],
   },
@@ -210,34 +210,29 @@ export const portfolioData = {
       accent: 'from-violet-300/25 via-blue-300/15 to-cyan-300/20',
     },
     {
-      title: 'Healthy Minds',
-      subtitle: 'AI Fitness Transformation Platform',
-      category: 'AI Fitness',
-      status: 'In Development',
-      stack: ['React Native / React', 'Firebase', 'Generative AI'],
-      description:
-        'Healthy Minds is an AI fitness transformation platform designed to create personalized fitness paths, nutrition guidance, progress tracking, and workout learning experiences.',
-      links: [
-        { label: 'GitHub', href: 'https://github.com/POKE-CODER-25/Healthy-Minds' },
-        { label: 'In Development', comingSoon: true },
+      title: 'Fit Minds',
+      subtitle: 'AI Fitness & Health Platform',
+      category: 'AI Fitness & Health Platform',
+      status: 'Completed',
+      stack: [
+        'React',
+        'Vite',
+        'JavaScript',
+        'Tailwind CSS',
+        'Firebase Authentication',
+        'Firestore',
+        'Firebase Hosting',
+        'Google Gemini API',
+        'Responsive Design',
       ],
-      screenshots: [{ src: '/projects/healthy-minds.png', label: 'Product Preview' }],
+      description:
+        'Fit Minds is a production-ready AI-powered fitness and wellness platform that helps users build healthier habits through personalized workout planning, exercise rankings, AI diet planning, smart diet reports, BMI analysis, daily activity tracking with an integrated pedometer, and an intelligent Health AI assistant. It features Firebase authentication, persistent AI conversations, responsive design, and a mobile-friendly production-ready interface.',
+      links: [
+        { label: 'Live Demo', href: 'https://fit-minds-v2.web.app/' },
+        { label: 'GitHub', href: 'https://github.com/POKE-CODER-25/fit-minds' },
+      ],
+      screenshots: [{ src: '/projects/fit-minds.png', label: 'Product Preview' }],
       accent: 'from-cyan-300/20 via-blue-300/10 to-pink-300/20',
-    },
-    {
-      title: "King's Guess",
-      subtitle: 'Multiplayer Social Deduction Game',
-      category: 'Multiplayer Game',
-      status: 'In Development',
-      stack: ['React.js', 'Firebase', 'Realtime Multiplayer', 'Game Logic'],
-      description:
-        "King’s Guess is a multiplayer social deduction game inspired by classic hidden-role gameplay, featuring private rooms, secret roles, turn-based guessing, scoring, reconnect logic, and real-time Firebase gameplay.",
-      links: [
-        { label: 'GitHub', href: 'https://github.com/POKE-CODER-25/Kings-Guess' },
-        { label: 'In Development', comingSoon: true },
-      ],
-      screenshots: [{ src: '/projects/kings-guess.png', label: 'Game Preview' }],
-      accent: 'from-violet-300/25 via-cyan-300/10 to-blue-300/20',
     },
   ],
   certifications: [
