@@ -6,8 +6,8 @@ export const portfolioData = {
     email: 'adithyarajatp@gmail.com',
     linkedin: 'https://www.linkedin.com/in/pruthvi-ai-developer',
     linkedinLabel: 'linkedin.com/in/pruthvi-ai-developer',
-    github: 'https://github.com/POKE-CODER-25',
-    githubLabel: 'github.com/POKE-CODER-25',
+    github: 'https://github.com/Pruthvi-Adithya',
+    githubLabel: 'github.com/Pruthvi-Adithya',
     liveProject: 'https://pokemon-draft-arena-d21a7.web.app/',
     liveProjectLabel: 'pokemon-draft-arena-d21a7.web.app',
     liveProjectTitle: 'POKÉMON DRAFT ARENA',
@@ -123,7 +123,7 @@ export const portfolioData = {
         'Volt Sensei is an AI-powered JEE learning platform that helps students learn Physics, Chemistry, and Mathematics through interactive AI Senseis, quizzes, formula tools, dashboards, 3D models, and visual learning experiences.',
       links: [
         { label: 'Live Demo', href: 'https://volt-sensei.web.app' },
-        { label: 'GitHub', href: 'https://github.com/POKE-CODER-25/VOLT_SENSEI' },
+        { label: 'GitHub', href: 'https://github.com/Pruthvi-Adithya/VOLT_SENSEI' },
       ],
       screenshots: [
         { src: '/projects/volt-sensei.png', fallbackSrc: '/assets/projects/volt-home.png', label: 'Overview' },
@@ -145,7 +145,7 @@ export const portfolioData = {
         'Pokémon Draft Arena is a real-time multiplayer strategy game where two trainers create private rooms, draft hidden teams from randomized Pokémon pools, and compete through a score-based battle system. It includes hidden drafting, category-based pools, team previews, battle simulation, type-advantage scoring, match results, and Firebase-powered state management.',
       links: [
         { label: 'Live Demo', href: 'https://pokemon-draft-arena-d21a7.web.app/' },
-        { label: 'GitHub', href: 'https://github.com/POKE-CODER-25/POKEMON_BATTLE_ARENA' },
+        { label: 'GitHub', href: 'https://github.com/Pruthvi-Adithya/POKEMON_BATTLE_ARENA' },
       ],
       screenshots: [
         { src: '/assets/projects/Battle_Arena/pokemon-draft-arena-1.png', label: 'Battle Arena' },
@@ -167,7 +167,7 @@ export const portfolioData = {
         'ResumeForge is an AI-assisted resume builder and resume analysis platform designed to help students and job seekers create stronger resumes. It includes a resume builder, resume health report, upload and analysis workflow, improvement suggestions, live preview, resume editor, PDF and DOCX export, and local data persistence.',
       links: [
         { label: 'Live Demo', href: 'https://resume-forge-25.web.app/' },
-        { label: 'GitHub Repository', href: 'https://github.com/POKE-CODER-25/ResumeForge' },
+        { label: 'GitHub Repository', href: 'https://github.com/Pruthvi-Adithya/ResumeForge' },
       ],
       screenshots: [
         { src: '/assets/projects/ResumeForge/resumeforge-1.png', label: 'Resume Builder' },
@@ -197,7 +197,7 @@ export const portfolioData = {
         'Volt Interview is a browser-based voice interview simulator that helps students and developers practice realistic HR, Technical, and Project interviews. It includes Resume Interview and Student Interview modes, resume-aware and answer-aware questioning, voice input, spoken interviewer prompts, and recruiter-style performance reports.',
       links: [
         { label: 'Live Demo', href: 'https://volt-interview.web.app/' },
-        { label: 'GitHub', href: 'https://github.com/POKE-CODER-25/volt-interview' },
+        { label: 'GitHub', href: 'https://github.com/Pruthvi-Adithya/volt-interview' },
       ],
       screenshots: [
         { src: '/assets/projects/Volt_Interview/volt_interview1.png', label: 'Home Page' },
@@ -229,7 +229,7 @@ export const portfolioData = {
         'Fit Minds is a production-ready AI-powered fitness and wellness platform that helps users build healthier habits through personalized workout planning, exercise rankings, AI diet planning, smart diet reports, BMI analysis, daily activity tracking with an integrated pedometer, and an intelligent Health AI assistant. It features Firebase authentication, persistent AI conversations, responsive design, and a mobile-friendly production-ready interface.',
       links: [
         { label: 'Live Demo', href: 'https://fit-minds-v2.web.app/' },
-        { label: 'GitHub', href: 'https://github.com/POKE-CODER-25/fit-minds' },
+        { label: 'GitHub', href: 'https://github.com/Pruthvi-Adithya/fit-minds' },
       ],
       screenshots: [
         { src: '/assets/projects/Fit_minds/Fit_minds1.png', label: 'Home' },
